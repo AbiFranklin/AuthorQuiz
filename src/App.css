@@ -1,5 +1,18 @@
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-height: 400px;
+}
+
 .answer {
   border-left: 5px solid !important;
+}
+
+.answer:hover {
+  background-color: darkgray !important;
 }
 
 .footer {

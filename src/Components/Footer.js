@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 
 function Footer () {
     return (

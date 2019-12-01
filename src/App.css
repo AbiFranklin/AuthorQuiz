@@ -9,14 +9,36 @@ img {
 
 .answer {
   border-left: 5px solid !important;
+  cursor: pointer !important;
 }
 
-.answer:hover {
-  background-color: darkgray !important;
+.nextQuestion {
+  position: fixed !important;
+  bottom: 20% !important;
 }
 
 .footer {
   width: 83%;
   position: fixed !important;
   bottom: 0px !important;
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+    img {
+      margin-top: -25px;
+      max-height: 200px;
+    }
+
+    .nextQuestion {
+      position: relative !important;
+    }
+
+    .footer {
+      position: relative !important;
+    }
 }

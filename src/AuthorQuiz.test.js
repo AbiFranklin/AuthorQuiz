@@ -5,7 +5,7 @@ import Hero from './Components/Hero';
 import Turn from './Components/Turn';
 import Continue from './Components/Continue';
 import Footer from './Components/Footer'
-import Enzyme, { shallow } from 'enzyme'
+import Enzyme, { mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -15,11 +15,6 @@ describe("AuthorQuiz Tests", () => {
     const div = document.createElement('div');
     ReactDOM.render(<AuthorQuiz />, div)
   });
-
-  //Contains Hero
-  //Contains Turn
-  //Contains Continue
-  //Contains Footer
 })
 
 describe("Hero Tests", () => {
@@ -28,8 +23,19 @@ describe("Hero Tests", () => {
     ReactDOM.render(<Hero />, div)
   })
 
-  //Contains one h1
-  //Contains one p
+  let component;
+  beforeAll(() => {
+    component = mount(<Hero />)
+  })
+
+  it("returns two h1", () => {
+    expect(component.find("h1")).toHaveLength(2)
+  })
+  
+
+  it("returns one p", () => {
+    expect(component.find("p")).toHaveLength(1)
+  })
 })
 
 describe("Turn Tests", () => {
@@ -37,6 +43,20 @@ describe("Turn Tests", () => {
     const div = document.createElement('div');
     ReactDOM.render(<Turn />, div)
   })
+
+  let component;
+  beforeAll(() => {
+    component = mount(<Turn />);
+  });
+
+  it("should have four options", ()=> {
+    expect(component.find(".alert")).toHaveLength(4)
+  })
+
+  it("should show one img", () => {
+    expect(component.find("img")).toHaveLength(1)
+  })
+
 })
 
 describe("Continue Tests", () => {
@@ -44,6 +64,16 @@ describe("Continue Tests", () => {
     const div = document.createElement('div');
     ReactDOM.render(<Continue />, div)
   })
+
+  let component;
+  beforeAll(() => {
+    component = mount(<Continue />);
+  });
+
+  it("should have one button", ()=> {
+    expect(component.find(".btn")).toHaveLength(1)
+  })
+
 })
 
 describe("Footer Tests", () => {
@@ -52,5 +82,12 @@ describe("Footer Tests", () => {
     ReactDOM.render(<Footer />, div)
   })
 
-  //Contains one a
+  let component;
+  beforeAll(() => {
+    component = mount(<Footer />);
+  });
+
+  it("should have one links", ()=> {
+    expect(component.find("a")).toHaveLength(1)
+  })
 })

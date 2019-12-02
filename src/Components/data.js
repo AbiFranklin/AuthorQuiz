@@ -79,6 +79,10 @@ export const authors = [
         imgUrl: './img/dmacomber.jpg',
         books: ['A Good Yarn', 'The Shop on Blossom Street', 'Knit Together', 'Love Letters', '16 Lighthouse Road']
     },
+    {
+        imgUrl: './img/eapoe.jpg',
+        books: ['The Black Cat', 'The Pit and the Pendulum', 'The Raven', 'The Gold-Bug', 'The Cask of Amontillado']
+    },
    
 ]
 

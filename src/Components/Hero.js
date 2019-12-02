@@ -20,7 +20,7 @@ function mapStatetoProps(state) {
                     <p>Select the book written by the author shown.</p>
                 </Col>
                 <Col>
-                    <h1>Correct Answers: {props.correct} / {props.total}</h1>
+                    <h1>Correct Answers: <br/>{props.correct} / {props.total}</h1>
                 </Col>
             </Row>
         </Jumbotron>

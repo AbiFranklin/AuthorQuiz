@@ -44,8 +44,6 @@ function mapStatetoProps(state) {
     const randomauthorbook = shuffle(props.authors[randomauthor].books).slice(0,1);
     answers.push(randomauthorbook[0])
 
-    console.log(randomauthorbook)
-
     let answered = false;
 
     const onClick = (e) => {

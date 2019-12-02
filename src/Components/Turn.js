@@ -1,16 +1,37 @@
-import React, {useState} from 'react';
-import { Row, Col, Alert } from 'react-bootstrap';
-import {authors} from '../Components/data';
+import React from 'react';
+import { Row, Col, Alert, Button } from 'react-bootstrap';
+import { connect } from 'react-redux'
 import {shuffle} from 'underscore';
 import Continue from './Continue';
 import PropTypes from 'prop-types';
 
-function Turn (props) {
-    const randomauthor = Math.floor(Math.random() * authors.length)
+
+function mapStatetoProps(state) {
+    return {
+      authors: state.authors
+    }
+  }
+  
+  function matchDispatchToProps(dispatch){
+    return {
+      submitCorrect: () => {
+        dispatch({ type: 'CORRECT' })
+      },
+      submitWrong: () => {
+        dispatch({ type: 'WRONG' })
+      },
+      reset: () => {
+        dispatch({ type: 'RESET' })
+      }
+    }
+  }
+  
+  const Turn = connect(mapStatetoProps, matchDispatchToProps) (function Turn(props) {
+    const randomauthor = Math.floor(Math.random() * props.authors.length)
 
     function randombooks(){
         const allBooks = [];
-        authors.forEach((author, i) => {
+        props.authors.forEach((author, i) => {
             if (i !== randomauthor){
                 author.books.forEach(book => allBooks.push(book))
             }
@@ -20,19 +41,26 @@ function Turn (props) {
     }
 
     const answers = randombooks()
-    const randomauthorbook = shuffle(authors[randomauthor].books).slice(0,1);
+    const randomauthorbook = shuffle(props.authors[randomauthor].books).slice(0,1);
     answers.push(randomauthorbook[0])
+
+    console.log(randomauthorbook)
 
     let answered = false;
 
     const onClick = (e) => {
         if (answered === false) {
-            if (e.target.innerHTML === randomauthorbook) {
+            
+            if (e.target.innerHTML === randomauthorbook[0]) {
+                props.submitCorrect()
                 e.target.style.color = '#155724';
                 e.target.style.backgroundColor = '#d4edda';
                 e.target.style.borderColor = '#c3e6cb';
 
+                
+
             } else {
+                props.submitWrong()
                 e.target.style.color = '#721c24';
                 e.target.style.backgroundColor = '#f8d7da';
                 e.target.style.borderColor = '#f5c6cb';
@@ -46,9 +74,9 @@ function Turn (props) {
                 
                 rightAnswer[0].style.color = '#155724';
                 rightAnswer[0].style.backgroundColor = '#d4edda';
-                rightAnswer[0].style.borderColor = '#c3e6cb';
-    }
-}
+                rightAnswer[0].style.borderColor = '#c3e6cb';           
+                    }
+                }
             }
             answered = true;
         }
@@ -57,7 +85,7 @@ function Turn (props) {
     return (
     <Row className='turn'>
         <Col sm={{ span: 4 }} className='image'>
-            <img src={authors[randomauthor].imgUrl} className='authorimage' alt='Author' />
+            <img src={props.authors[randomauthor].imgUrl} className='authorimage' alt='Author' />
         </Col>
         <Col sm={{ span: 8 }}>
             {shuffle(answers).map((title) => {
@@ -73,7 +101,7 @@ function Turn (props) {
         <Continue nextQuestion={props.nextQuestion} />
     </Row>
     )
-  }
+  })
 
   Turn.propTypes = {
       nextQuestion: PropTypes.func

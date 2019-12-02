@@ -17,6 +17,11 @@ img {
   bottom: 20% !important;
 }
 
+.reset {
+  position: fixed !important;
+  bottom: 10% !important;
+}
+
 .footer {
   width: 83%;
   position: fixed !important;
